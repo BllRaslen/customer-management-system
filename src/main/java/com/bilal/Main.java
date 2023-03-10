@@ -42,16 +42,34 @@ public class Main {
 
     }
 
+        Customer customer= new Customer();
     @PostMapping
     public void addCustomer(@RequestBody NewCustomerRequest newCustomerRequest){
 
-        Customer customer= new Customer();
         customer.setName(newCustomerRequest.name());
         customer.setEmail(newCustomerRequest.email());
         customer.setAge(newCustomerRequest.age());
         customerRepository.save(customer);
+    }
 
+    @DeleteMapping("{customerId}")
+    public void eleteCustomer(@PathVariable("customerId") Integer id){
+        customerRepository.deleteById(id);
+    }
 
+    @PutMapping("{customerId}")
+    Customer replaceEmployee(@RequestBody Customer customer, @PathVariable Integer id) {
+
+        return customerRepository.findById(id)
+                .map(employee -> {
+                    employee.setName(customer.getName());
+                    employee.setEmail(customer.getEmail());
+                    return customerRepository.save(employee);
+                })
+                .orElseGet(() -> {
+                    customer.setId(id);
+                    return customerRepository.save(customer);
+                });
     }
 }
 
