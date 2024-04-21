@@ -22,7 +22,7 @@ This is a simple Spring Boot application for managing customer data. It provides
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/customer-management-system.git
+    git clone https://github.com/bllraslen/customer-management-system.git
     ```
 
 2. Navigate to the project directory:
